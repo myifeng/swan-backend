@@ -9,8 +9,8 @@ configure(allprojects) {
 }
 
 ext {
-    springCloudVersion = 'Hoxton.RELEASE'
-    springBootVersion = '2.2.1.RELEASE'
+    springCloudVersion = '2020.0.4'
+    springBootVersion = '2.5.5'
     JavaLang = JavaVersion.current()
 }
 
@@ -21,6 +21,7 @@ subprojects {
     apply plugin: 'java-library'
     apply plugin: 'io.freefair.lombok'
     apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'org.springframework.boot'
 
     targetCompatibility = JavaLang
     sourceCompatibility = JavaLang
@@ -48,8 +49,6 @@ subprojects {
 }
 
 configure(subprojects.findAll { it.name.endsWith('-app') }) {
-    apply plugin: 'org.springframework.boot'
-
     dependencies {
         implementation 'org.springframework.cloud:spring-cloud-starter'
         implementation 'org.springframework.boot:spring-boot-starter-actuator'

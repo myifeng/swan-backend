@@ -10,8 +10,8 @@
 
 <div align="center">
 
-![GitHub repo size](https://img.shields.io/badge/Spring%20Boot-2.2.1.RELEASE-green.svg)
-![GitHub repo size](https://img.shields.io/badge/Spring%20Cloud-Hoxton.RELEASE-green.svg)
+![GitHub repo size](https://img.shields.io/badge/Spring%20Boot-2.5.5-green.svg)
+![GitHub repo size](https://img.shields.io/badge/Spring%20Cloud-2020.0.4-green.svg)
 
 </div>
 
