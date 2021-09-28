@@ -1,9 +1,0 @@
-spring:
-  cloud:
-    config:
-      name: ${spring.application.name}
-      profile: dev
-      label: master
-      discovery:
-        enabled: true
-      fail-fast: true

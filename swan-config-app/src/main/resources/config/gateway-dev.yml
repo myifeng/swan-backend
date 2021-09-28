@@ -19,6 +19,12 @@ spring:
             - Path=/oauth/**
           filters:
             - StripPrefix=0
+        - id: auth
+          uri: lb://auth
+          predicates:
+            - Path=/auth/**
+          filters:
+            - StripPrefix=1
         - id: demo
           uri: lb://demo
           predicates:

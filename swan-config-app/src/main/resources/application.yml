@@ -5,4 +5,4 @@ spring:
   application:
     name: configserver
   profiles:
-    active: ${SPRING_PROFILES_ACTIVE:dev}
+    include: native

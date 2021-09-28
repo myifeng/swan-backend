@@ -17,11 +17,9 @@ ext {
 subprojects {
     apply plugin: 'java'
     apply plugin: 'idea'
-    apply plugin: 'eclipse'
     apply plugin: 'java-library'
     apply plugin: 'io.freefair.lombok'
     apply plugin: 'io.spring.dependency-management'
-    apply plugin: 'org.springframework.boot'
 
     targetCompatibility = JavaLang
     sourceCompatibility = JavaLang
@@ -36,6 +34,13 @@ subprojects {
             mavenBom "org.springframework.boot:spring-boot-dependencies:${springBootVersion}"
             mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
         }
+
+        dependencies {
+            dependencySet(group:'org.springframework.cloud', version: '2.2.5.RELEASE') {
+                entry 'spring-cloud-starter-security'
+                entry 'spring-cloud-starter-oauth2'
+            }
+        }
     }
 
     tasks.withType(JavaCompile) {
@@ -49,6 +54,8 @@ subprojects {
 }
 
 configure(subprojects.findAll { it.name.endsWith('-app') }) {
+    apply plugin: 'org.springframework.boot'
+
     dependencies {
         implementation 'org.springframework.cloud:spring-cloud-starter'
         implementation 'org.springframework.boot:spring-boot-starter-actuator'
