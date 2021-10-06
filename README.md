@@ -1,6 +1,6 @@
 <p align="center">
-  <a href="https://ant.design">
-    <img width="400" src="swan-backend-logo.png">
+  <a href="https://github.com/myifeng/swan-backend">
+    <img width="400" src="https://raw.githubusercontent.com/myifeng/swan-backend/main/swan-backend-logo.png">
   </a>
 </p>
 

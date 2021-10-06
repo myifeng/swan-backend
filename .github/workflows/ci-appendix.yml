@@ -19,6 +19,7 @@ on:
       - docker/Dockerfile-appendix
       - build.gradle
       - setting.gradle
+      - .github/workflows/ci-appendix.yml
 
 jobs:
   build:
@@ -60,3 +61,12 @@ jobs:
           platforms: linux/amd64,linux/arm64
           build-args:
             - VERSION=${{ env.SWAN_MODULE_VERSION }}
+      - name: Docker Hub Description
+        uses: peter-evans/dockerhub-description@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          repository: myifeng/swan-appendix
+          readme-filepath: ./README.md
+          short-description: ${{ github.event.repository.description }}
+
