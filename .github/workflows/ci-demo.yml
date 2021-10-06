@@ -60,8 +60,8 @@ jobs:
           file: docker/Dockerfile-${{ env.SWAN_MODULE_NAME }}
           tags: ${{ env.SWAN_IMAGE_TAGS }}
           platforms: linux/amd64,linux/arm64
-          build-args:
-            - VERSION=${{ env.SWAN_MODULE_VERSION }}
+          build-args: |
+            VERSION=${{ env.SWAN_MODULE_VERSION }}
       - name: Docker Hub Description
         uses: peter-evans/dockerhub-description@v2
         with:
