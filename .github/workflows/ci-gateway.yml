@@ -2,7 +2,10 @@ name: Gateway CI
 
 env:
   SWAN_MODULE_NAME: gateway
-  SWAN_IMAGE_TAGS: myifeng/swan-gateway:latest
+  SWAN_MODULE_VERSION: 1.0.0
+  SWAN_IMAGE_TAGS:
+    - myifeng/swan-gateway:latest
+    - myifeng/swan-gateway:1.0.0
   SWAN_MODULE_NAME_FULL: swan-gateway-app
 
 on:
@@ -55,3 +58,5 @@ jobs:
           file: docker/Dockerfile-${{ env.SWAN_MODULE_NAME }}
           tags: ${{ env.SWAN_IMAGE_TAGS }}
           platforms: linux/amd64,linux/arm64
+          build-args:
+            - VERSION=${{ env.SWAN_MODULE_VERSION }}
