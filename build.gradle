@@ -63,7 +63,7 @@ configure(subprojects.findAll { it.name.endsWith('-app') }) {
 }
 
 this.gradle.buildFinished {
-    subprojects.findAll { it.name.endsWith('-app') }.each { app ->
+    subprojects.findAll {it.name.endsWith('-app') }.each { app -> {
         fileTree(app.buildDir.toPath().resolve('libs')).files.stream()
                 .filter(file -> file.getName() == (app.name + "-" + project.getVersion() + ".jar"))
                 .forEach(file -> {
