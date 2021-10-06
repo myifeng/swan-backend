@@ -1,12 +1,17 @@
 FROM openjdk:8-jre-buster
 
-ENV TZ "Asia/Shanghai"
+ARG VERSION=1.0.0
+ARG SERVER_NAME=appendix
+ARG SERVER_PORT=9091
+
+LABEL maintainer "myifeng <myifengs@gmail.com>"
+LABEL version $VERSION
 
 ENV UPLOAD-FOLDER /swan/appendix
 
-COPY swan-appendix-app-1.0.0.SNAPSHOT.jar /swan/app.jar
+COPY swan-${SERVER_NAME}-app-${VERSION}.jar /swan/app.jar
 
-HEALTHCHECK CMD curl --fail http://localhost:9091/actuator/health || exit 1
+HEALTHCHECK CMD curl --fail http://localhost:$SERVER_PORT/actuator/health || exit 1
 
 WORKDIR /swan
 

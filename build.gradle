@@ -5,7 +5,7 @@ plugins {
 
 configure(allprojects) {
     group = 'io.github.myifeng.swan'
-    version = '1.0.0.SNAPSHOT'
+    version = '1.0.0'
 }
 
 ext {
@@ -64,10 +64,11 @@ configure(subprojects.findAll { it.name.endsWith('-app') }) {
 
 this.gradle.buildFinished {
     subprojects.findAll { it.name.endsWith('-app') }.each { app ->
-        {
-            fileTree(app.buildDir.toPath().resolve('libs')).files.forEach(file -> {
-                ant.move file: file, todir: rootProject.file('docker')
-            })
+        fileTree(app.buildDir.toPath().resolve('libs')).files.stream()
+                .filter(file -> file.getName() == (app.name + "-" + project.getVersion() + ".jar"))
+                .forEach(file -> {
+                    ant.copy file: file, todir: rootProject.file('docker')
+                })
         }
     }
 }

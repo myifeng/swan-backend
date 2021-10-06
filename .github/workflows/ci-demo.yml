@@ -2,7 +2,7 @@ name: Demo CI
 
 env:
   SWAN_MODULE_NAME: demo
-  SWAN_IMAGE_TAG: myifeng/swan-demo:latest
+  SWAN_IMAGE_TAGS: myifeng/swan-demo:latest
   SWAN_MODULE_NAME_FULL: swan-demo-app
 
 on:
@@ -54,5 +54,5 @@ jobs:
         with:
           context: docker
           file: docker/Dockerfile-${{ env.SWAN_MODULE_NAME }}
-          tags: ${{ env.SWAN_IMAGE_TAG }}
+          tags: ${{ env.SWAN_IMAGE_TAGS }}
           platforms: linux/amd64,linux/arm64
