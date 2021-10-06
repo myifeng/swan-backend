@@ -1,4 +1,4 @@
-package io.github.nyifeng.swan.config;
+package io.github.myifeng.swan.config;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
