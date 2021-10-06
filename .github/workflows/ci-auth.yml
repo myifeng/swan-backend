@@ -63,10 +63,10 @@ jobs:
           build-args:
             - VERSION=${{ env.SWAN_MODULE_VERSION }}
       - name: Docker Hub Description
-          uses: peter-evans/dockerhub-description@v2
-          with:
-            username: ${{ secrets.DOCKERHUB_USERNAME }}
-            password: ${{ secrets.DOCKERHUB_TOKEN }}
-            repository: myifeng/swan-auth
-            readme-filepath: ./README.md
-            short-description: ${{ github.event.repository.description }}
+        uses: peter-evans/dockerhub-description@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          repository: myifeng/swan-auth
+          readme-filepath: ./README.md
+          short-description: ${{ github.event.repository.description }}
