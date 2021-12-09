@@ -1,6 +1,13 @@
 server:
   port: 8761
 
+spring:
+  application:
+    name: eureka
+  cloud:
+    config:
+      enabled: false
+
 eureka:
   client:
     register-with-eureka: false
@@ -10,6 +17,6 @@ eureka:
 
 logging:
   level:
-    # 调测选项
     com.netflix.eureka: OFF
     com.netflix.discovery: OFF
+

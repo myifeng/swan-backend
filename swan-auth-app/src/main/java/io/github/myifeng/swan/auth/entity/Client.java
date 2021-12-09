@@ -1,6 +1,7 @@
 package io.github.myifeng.swan.auth.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 import org.apache.commons.lang.StringUtils;
@@ -10,6 +11,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -28,7 +30,10 @@ public class Client {
     @Column(name="ID", length = 48)
     private String id;
 
-    @Column(name = "CLIENT_ID", length = 48)
+    @Column(name = "NAME", length = 48)
+    private String name;
+
+    @Column(name = "CLIENT_ID", length = 48, unique = true)
     private String clientId;
 
     @Column(name = "CLIENT_SECRET", length = 256)
@@ -55,6 +60,13 @@ public class Client {
     @Builder.Default
     @Column(name = "AUTHORIZED_GRANT_TYPES", length = 200)
     private String authorizedGrantTypes = "client_credentials,authorization_code,password,refresh_token";
+
+    @Builder.Default
+    @Column(name = "CREATE_TIME")
+    private Date createTime = new Date();
+
+    @Column(name = "CREATE_ACCOUNT", length = 48)
+    private String createAccount;
 
     public Set<String> getScope() {
         if (StringUtils.isBlank(this.scope)) {

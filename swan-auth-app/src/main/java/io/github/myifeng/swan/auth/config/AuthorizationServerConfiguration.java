@@ -43,7 +43,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 	private TokenStore jwtTokenStore;
 
 	@Override
-	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+	public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
 		TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
 		List<TokenEnhancer> delegates = new ArrayList<>();
 		delegates.add(jwtAccessTokenConverter);
@@ -64,7 +64,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 	}
 
 	@Override
-	public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
+	public void configure(AuthorizationServerSecurityConfigurer security) {
 		security.allowFormAuthenticationForClients()
 				.tokenKeyAccess("permitAll()")
 				.checkTokenAccess("isAuthenticated()")

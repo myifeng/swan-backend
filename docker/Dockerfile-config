@@ -1,8 +1,15 @@
-FROM openjdk:8-jre-slim-buster
+FROM openjdk:8-jre-buster
 
-ENV TZ "Asia/Shanghai"
+ARG VERSION=1.0.0
+ARG SERVER_NAME=config
+ARG SERVER_PORT=9091
 
-COPY swan-config-app-1.0.0.SNAPSHOT.jar /swan/app.jar
+LABEL maintainer "myifeng <myifengs@gmail.com>"
+LABEL version $VERSION
+
+COPY swan-${SERVER_NAME}-app-${VERSION}.jar /swan/app.jar
+
+HEALTHCHECK CMD curl --fail http://localhost:$SERVER_PORT/actuator/health || exit 1
 
 WORKDIR /swan
 

@@ -1,4 +1,4 @@
 dependencies {
-    compile 'org.springframework.cloud:spring-cloud-starter-security'
-    compile 'org.springframework.cloud:spring-cloud-starter-oauth2'
+    api 'org.springframework.cloud:spring-cloud-starter-security'
+    api 'org.springframework.cloud:spring-cloud-starter-oauth2'
 }

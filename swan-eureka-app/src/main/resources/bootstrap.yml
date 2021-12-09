@@ -1,6 +1,0 @@
-spring:
-  application:
-    name: eureka
-  profiles:
-    active: ${SPRING_PROFILES_ACTIVE:dev}
-

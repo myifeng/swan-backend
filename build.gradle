@@ -1,24 +1,23 @@
 plugins {
-    id 'org.jetbrains.kotlin.jvm' version '1.3.61' apply false
-    id 'org.springframework.boot' version '2.2.1.RELEASE' apply false
+    id 'org.springframework.boot' version '2.5.5' apply false
     id 'io.freefair.lombok' version '4.1.5' apply false
 }
 
-def springCloudVersion = 'Hoxton.RELEASE'
-def springBootVersion = '2.2.1.RELEASE'
-def JavaLang = JavaVersion.current()
-
-// 定义 version
 configure(allprojects) {
-    version = '1.0.0.SNAPSHOT'
+    group = 'io.github.myifeng.swan'
+    version = '1.0.0'
 }
 
-// 定义通用依赖
+ext {
+    springCloudVersion = '2020.0.4'
+    springBootVersion = '2.5.5'
+    JavaLang = JavaVersion.current()
+}
+
 subprojects {
     apply plugin: 'java'
-    apply plugin: 'kotlin'
     apply plugin: 'idea'
-    apply plugin: 'eclipse'
+    apply plugin: 'java-library'
     apply plugin: 'io.freefair.lombok'
     apply plugin: 'io.spring.dependency-management'
 
@@ -30,24 +29,18 @@ subprojects {
         maven { url 'https://maven.aliyun.com/repository/central' }
     }
 
-    dependencies {
-        compile 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
-        compile 'org.jetbrains.kotlin:kotlin-reflect'
-    }
-
     dependencyManagement {
         imports {
             mavenBom "org.springframework.boot:spring-boot-dependencies:${springBootVersion}"
             mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
         }
-    }
 
-    compileKotlin {
-        kotlinOptions.jvmTarget = JavaLang
-    }
-
-    compileTestKotlin {
-        kotlinOptions.jvmTarget = JavaLang
+        dependencies {
+            dependencySet(group:'org.springframework.cloud', version: '2.2.5.RELEASE') {
+                entry 'spring-cloud-starter-security'
+                entry 'spring-cloud-starter-oauth2'
+            }
+        }
     }
 
     tasks.withType(JavaCompile) {
@@ -64,21 +57,18 @@ configure(subprojects.findAll { it.name.endsWith('-app') }) {
     apply plugin: 'org.springframework.boot'
 
     dependencies {
-        compile 'org.springframework.cloud:spring-cloud-starter'
-        compile 'org.springframework.boot:spring-boot-starter-actuator'
+        implementation 'org.springframework.cloud:spring-cloud-starter'
+        implementation 'org.springframework.boot:spring-boot-starter-actuator'
     }
 }
 
-task finalize(type: Copy) {
-    doLast { println 'running now' }
-}
-
 this.gradle.buildFinished {
-    subprojects.findAll { it.name.endsWith('-app') }.each { app ->
-        {
-            fileTree(app.buildDir.toPath().resolve('libs')).files.forEach(file -> {
-                ant.move file: file, todir: rootProject.file('docker')
-            })
+    subprojects.findAll {it.name.endsWith('-app') }.each { app -> {
+        fileTree(app.buildDir.toPath().resolve('libs')).files.stream()
+                .filter(file -> file.getName() == (app.name + "-" + project.getVersion() + ".jar"))
+                .forEach(file -> {
+                    ant.copy file: file, todir: rootProject.file('docker')
+                })
         }
     }
 }

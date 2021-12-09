@@ -1,6 +1,6 @@
 <p align="center">
-  <a href="https://ant.design">
-    <img width="400" src="swan-backend-logo.png">
+  <a href="https://github.com/myifeng/swan-backend">
+    <img width="400" src="https://raw.githubusercontent.com/myifeng/swan-backend/main/swan-backend-logo.png">
   </a>
 </p>
 
@@ -10,8 +10,8 @@
 
 <div align="center">
 
-![GitHub repo size](https://img.shields.io/badge/Spring%20Boot-2.2.1.RELEASE-green.svg)
-![GitHub repo size](https://img.shields.io/badge/Spring%20Cloud-Hoxton.RELEASE-green.svg)
+![GitHub repo size](https://img.shields.io/badge/Spring%20Boot-2.5.5-green.svg)
+![GitHub repo size](https://img.shields.io/badge/Spring%20Cloud-2020.0.4-green.svg)
 
 </div>
 
