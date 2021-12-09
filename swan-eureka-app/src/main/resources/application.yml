@@ -4,16 +4,19 @@ server:
 spring:
   application:
     name: eureka
-  config:
-    import: "configserver:"
   cloud:
     config:
-      name: ${spring.application.name}
-      profile: dev
-      label: master
-      uri: http://${CONFIG_SERVER_NAME:localhost}:${CONFIG_SERVER_PORT:8888}
-      retry:
-        max-attempts: 20
-        max-interval: 15000
-        initial-interval: 10000
+      enabled: false
+
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+  server:
+    enable-self-preservation: false
+
+logging:
+  level:
+    com.netflix.eureka: OFF
+    com.netflix.discovery: OFF
 
